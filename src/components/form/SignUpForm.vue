@@ -122,11 +122,15 @@
           홈
         </button>
       </div>
+      <p>{{ logMessage }}</p>
     </form>
   </div>
 </template>
 
 <script>
+// import axios from "axios";
+import { registerUser } from "@/api/index";
+
 export default {
   data() {
     return {
@@ -146,27 +150,39 @@ export default {
     };
   },
   methods: {
-    submitForm(e) {
+    async submitForm(e) {
       // this.logMessage = "회원가입이 완료되었습니다.";
       e.preventDefault();
-      if (this.agreeChecked && this.pvChecked) {
-        console.log("회원가입완료");
-        console.log("아이디: " + this.username);
-        console.log("비밀번호:" + this.password);
-        console.log("이름:" + this.nickname);
-        console.log("이메일:" + this.email);
-        console.log("약관동의:" + this.agreeChecked);
-        console.log("개인정보:" + this.pvChecked);
-        console.log("마케팅:" + this.mkChecked);
-        this.initForm();
-        this.agreeChecked = false;
-        this.pvChecked = false;
-        this.mkChecked = false;
-        this.arr = [];
-        this.allChecked = false;
-      } else {
-        console.log("입력폼을 확인해주세요.");
-      }
+      // if (this.agreeChecked && this.pvChecked) {
+      //   console.log("회원가입완료");
+      //   console.log("아이디: " + this.username);
+      //   console.log("비밀번호:" + this.password);
+      //   console.log("이름:" + this.nickname);
+      //   console.log("이메일:" + this.email);
+      //   console.log("약관동의:" + this.agreeChecked);
+      //   console.log("개인정보:" + this.pvChecked);
+      //   console.log("마케팅:" + this.mkChecked);
+      //   this.initForm();
+      //   this.agreeChecked = false;
+      //   this.pvChecked = false;
+      //   this.mkChecked = false;
+      //   this.arr = [];
+      //   this.allChecked = false;
+      // } else {
+      //   console.log("입력폼을 확인해주세요.");
+      // }
+      // axios.post();
+      const user = {
+        username: this.username,
+        password: this.password,
+        nickname: this.nickname,
+        email: this.email
+      };
+      // console.log(user);
+      const res = await registerUser(user);
+      console.log(res.data);
+      this.logMessage = `${res.data.username}님이 가입되셨습니다.`;
+      this.initForm();
     },
     goLogin() {
       this.$router.push("/login").catch(() => {});
@@ -180,6 +196,11 @@ export default {
       this.passwordConfirm = "";
       this.nickname = "";
       this.email = "";
+      this.agreeChecked = false;
+      this.pvChecked = false;
+      this.mkChecked = false;
+      this.arr = [];
+      this.allChecked = false;
     },
     allCheck() {
       this.allChecked = !this.allChecked;

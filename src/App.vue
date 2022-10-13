@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <div class="app-contents">
-      <router-view></router-view>
+      <default-layout-view />
     </div>
   </div>
 </template>
 
 <script>
+import DefaultLayoutView from "@/views/DefaultLayoutView";
 export default {
+  components: { DefaultLayoutView },
   name: "App"
 };
 </script>

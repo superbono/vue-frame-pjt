@@ -1,15 +1,18 @@
 <template>
   <div>
     <AppHeader />
-    <h2>로그인페이지</h2>
+    <login-form />
   </div>
 </template>
 
 <script>
 import AppHeader from "@/components/common/AppHeader";
+import LoginForm from "@/components/form/LoginForm";
+
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    LoginForm
   }
 };
 </script>

@@ -179,9 +179,9 @@ export default {
         email: this.email
       };
       // console.log(user);
-      const res = await registerUser(user);
-      console.log(res.data);
-      this.logMessage = `${res.data.username}님이 가입되셨습니다.`;
+      const { data } = await registerUser(user);
+      console.log(data);
+      this.logMessage = `${data.username}님이 가입되셨습니다.`;
       this.initForm();
     },
     goLogin() {

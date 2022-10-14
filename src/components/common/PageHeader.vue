@@ -11,7 +11,7 @@ export default {};
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 .page-header {
-  font-size: 45px;
+  font-size: 35px;
   font-weight: 400;
   color: #456155;
   padding: 30px 5px 15px;

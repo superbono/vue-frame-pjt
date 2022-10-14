@@ -6,10 +6,23 @@
         <div>
           <label for="username">아이디</label>
           <input id="username" type="text" v-model="username" required />
+          <p class="validation-text">
+            <span class="warning" v-if="!isUsernameValid">
+              아이디를 사용할 수 없습니다.
+            </span>
+            <span class="confirm" v-else>
+              아이디를 사용할 수 있습니다.
+            </span>
+          </p>
         </div>
         <div>
           <label for="password">비밀번호</label>
           <input id="password" type="text" v-model="password" required />
+          <p class="validation-text">
+            <span class="warning" v-if="!isPasswordValid">
+              사용할 수 없는 비밀번호입니다.
+            </span>
+          </p>
         </div>
         <div>
           <label for="passwordConfirm">비밀번호확인</label>
@@ -19,15 +32,30 @@
             v-model="passwordConfirm"
             required
           />
-          {{ password !== passwordConfirm ? "비밀번호를 확인해주세요." : "" }}
+          <!-- {{ password !== passwordConfirm ? "비밀번호를 확인해주세요." : "" }} -->
+          <p class="validation-text">
+            <span class="warning" v-if="!isConfirmPasswordValid">
+              비밀번호가 일치하지 않습니다.
+            </span>
+          </p>
         </div>
         <div>
           <label for="nickname">닉네임</label>
           <input id="nickname" type="text" v-model="nickname" required />
+          <p class="validation-text">
+            <span class="warning" v-if="!isNicknameValid">
+              사용할 수 없는 닉네임입니다.
+            </span>
+          </p>
         </div>
         <div>
           <label for="email">이메일</label>
           <input id="email" type="email" v-model="email" required />
+          <p class="validation-text">
+            <span class="warning" v-if="!isEmailValid">
+              사용할 수 없는 이메일입니다.
+            </span>
+          </p>
           <!-- <button @click="createCode">인증하기</button> -->
         </div>
         <div>
@@ -96,7 +124,11 @@
             :class="isButtonDisabled"
             :disabled="isButtonDisabled"
           >
-            Create
+            {{
+              isButtonDisabled === null
+                ? "가입을 진행합니다."
+                : "형식에 맞게 입력해주세요."
+            }}
           </button>
           <!-- <button v-on:click="goLogin">
             로그인
@@ -261,6 +293,7 @@ export default {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  /* padding: 0 300px 20px 0 !important; */
 }
 .btn-container {
   margin-top: 30px;
@@ -268,6 +301,11 @@ export default {
 /* .btn {
   color: #000;
 } */
+.warning,
+.confirm {
+  font-size: 12px;
+}
+
 .log {
   width: 460px;
 }

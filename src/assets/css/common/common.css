@@ -60,7 +60,7 @@ body {
   }
   .form-wrapper.form-wrapper-sm {
     max-width: 550px;
-    margin: 70px auto;
+    margin: 200px auto;
   }
   .form-wrapper-sm .page-header {
     padding: 0px 0 20px;
@@ -125,6 +125,7 @@ body {
   .btn.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background: hsl(9, 82%, 56%) !important;
   }
   .log {
     color: #ff4057;
@@ -133,4 +134,7 @@ body {
   }
   .warning {
     color: #ff4057;
+  }
+  .confirm {
+    color:#21b314;
   }

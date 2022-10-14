@@ -27,14 +27,15 @@ body {
   /*--- LAYOUT ---*/
   .contents {
     max-width: 1020px;
-    margin: 0 auto;
+    margin: 100px auto;
     padding: 0 5px;
-    width: 100%;  
+    width: 100%;
+    height: 1000px;  
   }
 
   header {
     padding: 15px 15px 15px 5px;
-    border-bottom: 1px solid #d9d8df;
+    border-bottom: 1px solid #37465D;
   }
 
   /*--- HEADER ---*/
@@ -55,11 +56,11 @@ body {
     -webkit-box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08);
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08);
     border-radius: 3px;
-    padding: 15px 15px;
+    padding: 60px 40px;
   }
   .form-wrapper.form-wrapper-sm {
-    max-width: 500px;
-    margin: 40px auto;
+    max-width: 550px;
+    margin: 70px auto;
   }
   .form-wrapper-sm .page-header {
     padding: 0px 0 20px;
@@ -102,12 +103,24 @@ body {
   .form div:nth-last-child(2) {
     margin-bottom: 0.5rem;
   }
+  .form .checkbox_group input {
+    border: none !important;
+    box-shadow: none !important;
+    margin-left: 220px;
+    /* margin-bottom: -300px !important; */
+    /* padding: -10px !important; */
+  }
+  .form .checkbox_group label {
+    margin-top: -30px !important;
+  }
   .btn {
-    background: #FE9616;
-    padding: 0.5rem 1.5rem;
-    font-weight: 700;
-    border-radius: .25rem;
-    border: 0 solid #dae1e7;
+    background: #FE9616 !important;
+    padding: 0.5rem 1.5rem !important;
+    font-weight: 700 !important;
+    border-radius: .25rem !important;
+    border: 0 solid #dae1e7 !important;
+    color: #fff !important;
+    width: 100%;
   }
   .btn.disabled {
     opacity: 0.5;

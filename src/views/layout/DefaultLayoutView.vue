@@ -1,6 +1,6 @@
 <template>
   <div>
-    <default-layout-form />
+    <default-layout-form></default-layout-form>
   </div>
 </template>
 

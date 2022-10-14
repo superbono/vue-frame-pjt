@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="page-header">로그인페이지</h1>
+    <!-- <h1 class="page-header">로그인페이지</h1> -->
     <login-form />
   </div>
 </template>

@@ -18,9 +18,9 @@ footer {
   /* position: fixed;
 	bottom: 0;
 	width: 100%; */
-  height: 52px;
+  height: 200px;
   padding: 0 20px;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   font-size: 14px;
   display: flex;
   justify-content: space-between;

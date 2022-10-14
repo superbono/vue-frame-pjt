@@ -10,9 +10,9 @@
             <span class="warning" v-if="!isUsernameValid">
               아이디를 사용할 수 없습니다.
             </span>
-            <span class="confirm" v-else>
+            <!-- <span class="confirm" v-else>
               아이디를 사용할 수 있습니다.
-            </span>
+            </span> -->
           </p>
         </div>
         <div>
@@ -177,18 +177,33 @@ export default {
   },
   computed: {
     isUsernameValid() {
+      if (this.username === "") {
+        return true;
+      }
       return validateUsername(this.username);
     },
     isPasswordValid() {
+      if (this.password === "") {
+        return true;
+      }
       return validatePassword(this.password);
     },
     isConfirmPasswordValid() {
+      if (this.passwordConfirm === "") {
+        return true;
+      }
       return this.password === this.passwordConfirm && this.password.length > 0;
     },
     isNicknameValid() {
+      if (this.nickname === "") {
+        return true;
+      }
       return validateNickname(this.nickname);
     },
     isEmailValid() {
+      if (this.email === "") {
+        return true;
+      }
       return validateEmail(this.email);
     },
     isAgreeValid() {

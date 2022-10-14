@@ -1,17 +1,17 @@
 <template>
   <div>
-    <!-- <app-header /> -->
+    <app-header />
     <router-view />
     <app-footer />
   </div>
 </template>
 
 <script>
-// import AppHeader from "@/components/common/AppHeader";
+import AppHeader from "@/components/common/AppHeader";
 import AppFooter from "@/components/common/AppFooter";
 export default {
   components: {
-    // AppHeader,
+    AppHeader,
     AppFooter
   }
 };

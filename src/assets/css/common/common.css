@@ -31,6 +31,12 @@ body {
     padding: 0 5px;
     width: 100%;  
   }
+
+  header {
+    padding: 15px 15px 15px 5px;
+    border-bottom: 1px solid #d9d8df;
+  }
+
   /*--- HEADER ---*/
   .page-header {
     font-size: 45px;

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <AppHeader />
-    <h2>메인페이지</h2>
+    <h1 class="page-header">메인페이지</h1>
+    <main-form />
   </div>
 </template>
 
 <script>
-import AppHeader from "@/components/common/AppHeader";
+import MainForm from "@/components/form/MainForm.vue";
 export default {
   components: {
-    AppHeader
+    MainForm
   }
 };
 </script>

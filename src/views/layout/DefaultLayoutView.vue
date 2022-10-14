@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DefaultLayoutForm from "../components/layouts/DefaultLayoutForm.vue";
+import DefaultLayoutForm from "../../components/layouts/DefaultLayoutForm.vue";
 
 export default {
   components: { DefaultLayoutForm }

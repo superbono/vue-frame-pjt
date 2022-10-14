@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <div class="app-contents">
-      <default-layout-view />
-    </div>
+    <default-layout-view />
   </div>
 </template>
 
 <script>
-import DefaultLayoutView from "@/views/DefaultLayoutView";
+import DefaultLayoutView from "@/views/layout/DefaultLayoutView";
 export default {
   components: { DefaultLayoutView },
   name: "App"
@@ -15,6 +13,5 @@ export default {
 </script>
 
 <style>
-@import "./assets/css/common.css";
-/* @import "./assets/css/reset.css"; */
+@import "./assets/css/index.css";
 </style>

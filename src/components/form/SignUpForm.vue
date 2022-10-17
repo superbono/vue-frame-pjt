@@ -5,7 +5,12 @@
 			<form @submit.prevent="submitForm" class="form">
 				<div>
 					<label for="username">아이디</label>
-					<input id="username" type="text" v-model="username" required />
+					<input
+						id="username"
+						type="text"
+						v-model="username"
+						placeholder="6~16자/영문, 소문자, 숫자 사용가능"
+					/>
 					<p class="validation-text">
 						<span class="warning" v-if="!isUsernameValid">
 							사용할 수 없는 아이디입니다.
@@ -17,7 +22,12 @@
 				</div>
 				<div>
 					<label for="password">비밀번호</label>
-					<input id="password" type="text" v-model="password" required />
+					<input
+						id="password"
+						type="text"
+						v-model="password"
+						placeholder="6~16자/문자, 숫자, 특수 기호 사용가능"
+					/>
 					<p class="validation-text">
 						<span class="warning" v-if="!isPasswordValid">
 							사용할 수 없는 비밀번호입니다.
@@ -30,7 +40,7 @@
 						id="passwordConfirm"
 						type="text"
 						v-model="passwordConfirm"
-						required
+						placeholder="비밀번호를 한번 더 입력하세요"
 					/>
 					<!-- {{ password !== passwordConfirm ? "비밀번호를 확인해주세요." : "" }} -->
 					<p class="validation-text">
@@ -39,9 +49,17 @@
 						</span>
 					</p>
 				</div>
+				<br />
+				<hr />
+				<br />
 				<div>
-					<label for="nickname">닉네임</label>
-					<input id="nickname" type="text" v-model="nickname" required />
+					<label for="nickname">이름 또는 기업명</label>
+					<input
+						id="nickname"
+						type="text"
+						v-model="nickname"
+						placeholder="이름 또는 기업명을 입력하세요"
+					/>
 					<p class="validation-text">
 						<span class="warning" v-if="!isNicknameValid">
 							사용할 수 없는 닉네임입니다.
@@ -49,8 +67,27 @@
 					</p>
 				</div>
 				<div>
+					<label for="phone">휴대전화</label>
+					<input
+						id="phone"
+						type="text"
+						v-model="phone"
+						placeholder="-을 포함하여 핸드폰번호를 입력해주세요."
+					/>
+					<p class="validation-text">
+						<span class="warning" v-if="!isPhoneValid">
+							휴대폰번호를 다시 입력해주세요.
+						</span>
+					</p>
+				</div>
+				<div>
 					<label for="email">이메일</label>
-					<input id="email" type="email" v-model="email" required />
+					<input
+						id="email"
+						type="email"
+						v-model="email"
+						placeholder="이메일주소를 입력해주세요"
+					/>
 					<button
 						class="email_btn"
 						type="button"
@@ -58,7 +95,7 @@
 						@click="createCode"
 						:disabled="!isEmailValid"
 					>
-						번호전송
+						인증하기
 					</button>
 
 					<p class="validation-text">
@@ -71,6 +108,7 @@
 					</p>
 				</div>
 				<div>
+					<label for="code">인증번호입력</label>
 					<input id="code" type="code" v-model="code" required />
 					<!-- <button
 						class="warn_code_btn"
@@ -114,7 +152,11 @@
           }} -->
 					</p>
 				</div>
+				<br />
 				<hr />
+				<br /><br />
+				<h5>기업약관 동의</h5>
+				<br />
 				<div class="checkbox_group">
 					<div>
 						<input
@@ -178,6 +220,9 @@
 								: '형식에 맞게 입력해주세요.'
 						}}
 					</button>
+					<button class="moveBtn" v-on:click="goLogin">
+						로그인하기
+					</button>
 					<!-- <button v-on:click="goLogin">
             로그인
           </button>
@@ -200,6 +245,7 @@ import {
 	validateEmail,
 	validatePassword,
 	validateNickname,
+	validatePhone,
 } from '@/utils/validation';
 
 export default {
@@ -209,6 +255,7 @@ export default {
 			password: '',
 			passwordConfirm: '',
 			nickname: '',
+			phone: '',
 			email: '',
 			arr: [],
 			allChecked: false,
@@ -251,15 +298,21 @@ export default {
 			}
 			return validateNickname(this.nickname);
 		},
+		isPhoneValid() {
+			if (this.phone === '') {
+				return true;
+			}
+			return validatePhone(this.phone);
+		},
 		isEmailValid() {
 			if (this.email === '') {
 				return true;
 			}
 			return validateEmail(this.email);
 		},
-		isCertiValid() {
-			return this.certi;
-		},
+		// isCertiValid() {
+		// 	return this.certi;
+		// },
 		isAgreeValid() {
 			return this.agreeChecked && this.pvChecked;
 		},
@@ -268,6 +321,7 @@ export default {
 				!this.password ||
 				!this.passwordConfirm ||
 				!this.nickname ||
+				!this.phone ||
 				!this.email ||
 				!this.agreeChecked ||
 				!this.pvChecked ||
@@ -276,6 +330,7 @@ export default {
 				!validateUsername(this.username) ||
 				!validatePassword(this.password) ||
 				!validateNickname(this.nickname) ||
+				!validatePhone(this.phone) ||
 				!validateEmail(this.email)
 				? 'disabled'
 				: null;
@@ -302,6 +357,7 @@ export default {
 				username: this.username,
 				password: this.password,
 				nickname: this.nickname,
+				phone: this.phone,
 				email: this.email,
 			};
 			// console.log(user);
@@ -321,6 +377,7 @@ export default {
 			this.password = '';
 			this.passwordConfirm = '';
 			this.nickname = '';
+			this.phone = '';
 			this.email = '';
 			this.agreeChecked = false;
 			this.pvChecked = false;
@@ -397,5 +454,9 @@ export default {
 }
 .log {
 	width: 460px;
+}
+.moveBtn {
+	margin-top: 10px;
+	background: steelblue !important;
 }
 </style>

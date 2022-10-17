@@ -5,7 +5,12 @@
 			<form @submit.prevent="submitForm" class="form">
 				<div>
 					<label for="username">아이디</label>
-					<input id="username" type="text" v-model="username" required />
+					<input
+						id="username"
+						type="text"
+						v-model="username"
+						placeholder="아이디를 입력해주세요"
+					/>
 					<p class="validation-text">
 						<span class="warning" v-if="!isUsernameValid">
 							아이디를 확인해주세요.
@@ -14,7 +19,12 @@
 				</div>
 				<div>
 					<label for="password">비밀번호</label>
-					<input id="password" type="text" v-model="password" required />
+					<input
+						id="password"
+						type="text"
+						v-model="password"
+						placeholder="비밀번호를 입력해주세요"
+					/>
 					<p class="validation-text">
 						<span class="warning" v-if="!isPasswordValid">
 							사용할 수 없는 비밀번호입니다.
@@ -35,10 +45,10 @@
 								: '아이디와 비밀번호를 입력해주세요.'
 						}}
 					</button>
-					<!-- <button v-on:click="goLogin">
-            로그인
-          </button>
-          <button v-on:click="goHome">
+					<button class="moveBtn" v-on:click="goRegiste">
+						회원가입하기
+					</button>
+					<!-- <button v-on:click="goHome">
             홈
           </button> -->
 				</div>
@@ -126,6 +136,9 @@ export default {
 			this.username = '';
 			this.password = '';
 			//   this.logMessage = "";
+		},
+		goRegiste() {
+			this.$router.push('/signup').catch(() => {});
 		},
 	},
 };

@@ -103,6 +103,13 @@ body {
     padding: 0.5rem 0.75rem;
     margin-bottom: 1rem;
   }
+  #code {
+    width: 100% !important;
+  }
+  .form #email
+  {
+    width: 80% !important;
+  }
   .form input.valid {
     border: 1px solid #21b314;
   }
@@ -132,6 +139,49 @@ body {
     width: 100%;
   }
   .btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: hsl(9, 82%, 56%) !important;
+  }
+  .email_btn,
+  .code_btn
+  {
+    position: absolute;
+    width: 90px;
+    margin-right: 160px;
+    height: 42px;
+    border: none;
+    background:#3fc1c9;
+    color: #fff;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 13px;
+  }
+  .com_btn {
+    position: absolute;
+    width: 90px;
+    margin-right: 160px;
+    height: 42px;
+    border: none;
+    color: #fff;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 13px;
+    background: #21b314;
+  }
+  .warn_code_btn {
+    position: absolute;
+    width: 90px;
+    margin-right: 160px;
+    height: 42px;
+    border: none;
+    color: #fff;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 13px;
+    background: #9b9898;
+  }
+  .email_btn.disabled {
     opacity: 0.5;
     cursor: not-allowed;
     background: hsl(9, 82%, 56%) !important;

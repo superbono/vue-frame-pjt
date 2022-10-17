@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <default-layout-form></default-layout-form>
-  </div>
+	<div>
+		<default-layout-form></default-layout-form>
+	</div>
 </template>
 
 <script>
-import DefaultLayoutForm from "../../components/layouts/DefaultLayoutForm.vue";
+import DefaultLayoutForm from '../../components/layouts/DefaultLayoutForm.vue';
 
 export default {
-  components: { DefaultLayoutForm }
+	components: { DefaultLayoutForm },
 };
 </script>
 

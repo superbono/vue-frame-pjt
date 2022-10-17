@@ -51,12 +51,56 @@
 				<div>
 					<label for="email">이메일</label>
 					<input id="email" type="email" v-model="email" required />
+					<button
+						class="email_btn"
+						type="button"
+						:class="isCertiBtnDisabled"
+						@click="createCode"
+						:disabled="!isEmailValid"
+					>
+						번호전송
+					</button>
+
 					<p class="validation-text">
 						<span class="warning" v-if="!isEmailValid">
 							사용할 수 없는 이메일입니다.
 						</span>
+						<span v-else-if="sendCerti">
+							인증번호를 보냈습니다.
+						</span>
 					</p>
-					<!-- <button @click="createCode">인증하기</button> -->
+				</div>
+				<div>
+					<input id="code" type="code" v-model="code" required />
+					<!-- <button
+						class="warn_code_btn"
+						type="submit"
+						:class="isCertiBtnDisabled"
+						@click="confCode"
+						:disabled="!isEmailValid"
+						v-if="code == '' || !isConfirmCode"
+					>
+						인증하기
+					</button> -->
+					<!-- <span
+						class="com_btn"
+						type="submit"
+						:class="isCertiBtnDisabled"
+						v-on:click="confCode"
+						:disabled="!isEmailValid"
+						v-else
+					> -->
+					<!-- 인증확인 -->
+					<!-- </span> -->
+					<p class="validation-text">
+						<span class="warning" v-if="!isConfirmCode">
+							인증번호를 확인해주세요.
+						</span>
+						<span class="warning" v-else-if="code == ''"> </span>
+						<span class="confirm" v-else>
+							인증번호가 확인되었습니다.
+						</span>
+					</p>
 				</div>
 				<div>
 					<!-- <label for="confirm">인증</label> -->
@@ -171,9 +215,12 @@ export default {
 			agreeChecked: false,
 			pvChecked: false,
 			mkChecked: false,
-			code: '',
+			certi: false,
 			confirm: false,
 			logMessage: '',
+			confirmCode: '4044',
+			code: '',
+			sendCerti: false,
 		};
 	},
 	components: {
@@ -210,6 +257,9 @@ export default {
 			}
 			return validateEmail(this.email);
 		},
+		isCertiValid() {
+			return this.certi;
+		},
 		isAgreeValid() {
 			return this.agreeChecked && this.pvChecked;
 		},
@@ -221,12 +271,28 @@ export default {
 				!this.email ||
 				!this.agreeChecked ||
 				!this.pvChecked ||
+				this.code != this.confirmCode ||
+				// !this.certi ||
 				!validateUsername(this.username) ||
 				!validatePassword(this.password) ||
 				!validateNickname(this.nickname) ||
 				!validateEmail(this.email)
 				? 'disabled'
 				: null;
+		},
+		isCertiBtnDisabled() {
+			return !this.email ||
+				// !this.certi ||
+				!validateEmail(this.email)
+				? // !this.isCertiValid
+				  'disabled'
+				: null;
+		},
+		isConfirmCode() {
+			if (this.code === '') {
+				return true;
+			}
+			return this.code === this.confirmCode;
 		},
 	},
 	methods: {
@@ -261,6 +327,7 @@ export default {
 			this.mkChecked = false;
 			this.arr = [];
 			this.allChecked = false;
+			this.code = '';
 		},
 		allCheck() {
 			this.allChecked = !this.allChecked;
@@ -289,13 +356,17 @@ export default {
 			console.log(this.mkChecked);
 		},
 		createCode() {
-			this.code = 'abcd';
 			// alert("인증번호를 보냈습니다.");
-			console.log(this.code);
+			alert('인증번호를 보냈습니다.');
 		},
-		confirmCode() {
-			console.log('인증번호 테스트');
-		},
+		// confCode() {
+		// 	if (this.isConfirmCode) {
+		// 		this.certi = true;
+		// 		// this.logMessage = '인증확인가 확인되었습니다.';
+		// 	} else {
+		// 		this.logMessage = '인증번호를 확인해주세요.';
+		// 	}
+		// },
 	},
 };
 </script>

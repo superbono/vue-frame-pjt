@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <not-found-form></not-found-form>
-  </div>
+	<div>
+		<not-found-form></not-found-form>
+	</div>
 </template>
 
 <script>
-import NotFoundForm from "@/components/form/NotFoundForm";
+import NotFoundForm from '@/components/form/NotFoundForm';
 export default {
-  components: {
-    NotFoundForm
-  }
+	components: {
+		NotFoundForm,
+	},
 };
 </script>
 

@@ -10,6 +10,7 @@
 						type="text"
 						v-model="username"
 						placeholder="6~16자/영문, 소문자, 숫자 사용가능"
+						ref="usernameRef"
 					/>
 					<p class="validation-text">
 						<span class="warning" v-if="!isUsernameValid">
@@ -109,7 +110,13 @@
 				</div>
 				<div>
 					<label for="code">인증번호입력</label>
-					<input id="code" type="code" v-model="code" required />
+					<input
+						id="code"
+						type="code"
+						v-model="code"
+						required
+						placeholder="인증번호를 입력해주세요"
+					/>
 					<!-- <button
 						class="warn_code_btn"
 						type="submit"
@@ -239,6 +246,7 @@
 <script>
 // import axios from "axios";
 import { registerUser } from '@/api/index';
+// import axios from 'axios';
 import PageHeader from '@/components/common/PageHeader';
 import {
 	validateUsername,
@@ -268,6 +276,7 @@ export default {
 			confirmCode: '4044',
 			code: '',
 			sendCerti: false,
+			statusCode: 0,
 		};
 	},
 	components: {
@@ -351,8 +360,21 @@ export default {
 		},
 	},
 	methods: {
-		async submitForm(e) {
-			e.preventDefault();
+		// async submitForm(e) {
+		// 	e.preventDefault();
+		// 	const user = {
+		// 		username: this.username,
+		// 		password: this.password,
+		// 		nickname: this.nickname,
+		// 		phone: this.phone,
+		// 		email: this.email,
+		// 	};
+		// 	const res = await registerUser(user);
+		// 	console.log(res);
+		// 	this.logMessage = `${res.data.username}님이 가입되셨습니다.`;
+		// 	this.initForm();
+		// },
+		async submitForm() {
 			const user = {
 				username: this.username,
 				password: this.password,
@@ -360,11 +382,29 @@ export default {
 				phone: this.phone,
 				email: this.email,
 			};
-			// console.log(user);
-			const { data } = await registerUser(user);
-			console.log(data);
-			this.logMessage = `${data.username}님이 가입되셨습니다.`;
-			this.initForm();
+			try {
+				const res = await registerUser(user);
+				console.log(res);
+				// this.logMessage = `${data.user.username}님 로그인되었습니다.`;
+				// console.log('가입성공');
+				this.logMessage = `${res.data.username}님이 가입되셨습니다.`;
+				this.initForm();
+				// this.initForm();
+			} catch (error) {
+				// console.log(error.request.status);
+				this.statusCode = error.request.status;
+				// console.log(error.response.data);
+				if (this.statusCode == 409) {
+					this.logMessage = '아이디가 중복됩니다.';
+					this.username = '';
+					this.statusCode = 0;
+					this.$refs.usernameRef.focus();
+				} else {
+					this.logMessage = '서버작동이 안됩니다.';
+				}
+
+				// this.initForm();
+			}
 		},
 		goLogin() {
 			this.$router.push('/login').catch(() => {});
@@ -385,6 +425,7 @@ export default {
 			this.arr = [];
 			this.allChecked = false;
 			this.code = '';
+			this.logMessage = '';
 		},
 		allCheck() {
 			this.allChecked = !this.allChecked;
@@ -458,5 +499,9 @@ export default {
 .moveBtn {
 	margin-top: 10px;
 	background: steelblue !important;
+}
+.warning_agree {
+	color: #ff4057;
+	font-weight: bold;
 }
 </style>

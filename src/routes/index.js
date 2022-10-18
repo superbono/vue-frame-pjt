@@ -8,7 +8,7 @@ export default new VueRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/main',
+			redirect: '/login',
 		},
 		{
 			path: '/main',
@@ -21,6 +21,10 @@ export default new VueRouter({
 		{
 			path: '/signup',
 			component: () => import('@/views/user/SignUpView'),
+		},
+		{
+			path: '/mypage',
+			component: () => import('@/views/user/MypageView'),
 		},
 		{
 			path: '*',

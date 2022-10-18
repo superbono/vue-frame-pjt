@@ -5,6 +5,9 @@ import axios from 'axios';
 const instance = axios.create({
 	//   baseURL: "http://localhost:3000/"
 	baseURL: process.env.VUE_APP_API_URL,
+	headers: {
+		Authorization: 'test1234', // header의 속성
+	},
 });
 
 function registerUser(userData) {

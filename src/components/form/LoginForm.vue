@@ -10,6 +10,7 @@
 						type="text"
 						v-model="username"
 						placeholder="아이디를 입력해주세요"
+						ref="usernameRef"
 					/>
 					<p class="validation-text">
 						<span class="warning" v-if="!isUsernameValid">
@@ -48,9 +49,6 @@
 					<button class="moveBtn" v-on:click="goRegiste">
 						회원가입하기
 					</button>
-					<!-- <button v-on:click="goHome">
-            홈
-          </button> -->
 				</div>
 				<!-- <button
           v-bind:disabled="!isUsernameValid || !isPasswordValid"
@@ -76,6 +74,7 @@ export default {
 		return {
 			username: '',
 			password: '',
+			statusCode: 0,
 			logMessage: '',
 		};
 	},
@@ -121,15 +120,23 @@ export default {
 			try {
 				const { data } = await loginUser(userData);
 				console.log(data);
-				this.logMessage = `${data.user.username}님 로그인되었습니다.`;
+				// this.logMessage = `${data.user.username}님 로그인되었습니다.`;
+				this.$store.commit('setUsername', data.user.username);
+				this.$store.commit('setToken', data.token);
 				this.$router.push('/main').catch(() => {});
-				// this.initForm();
+				this.initForm();
 			} catch (error) {
 				// console.log(error.response.data);
-				this.logMessage = error.response.data;
+				this.statusCode = error.request.status;
+				if (this.statusCode == 401) {
+					this.logMessage = '회원이 아닙니다. 회원가입 후 이용해주세요.';
+					this.initForm();
+					this.statusCode = 0;
+					this.$refs.usernameRef.focus();
+				} else {
+					this.logMessage = '서버작동이 안됩니다.';
+				}
 				// this.initForm();
-			} finally {
-				this.initForm();
 			}
 		},
 		initForm() {
